@@ -27,3 +27,4 @@ li{aspect-ratio:1;border-radius:6px;border:1px solid #e3e6ef;cursor:pointer}
 li.sel{outline:2px solid #5b7cfa;outline-offset:1px}
 #pagecolors{grid-template-columns:repeat(12,1fr)}
 footer{margin-top:10px;min-height:14px}#toast{font-size:11px;color:#2e9e5b}
+#upgrade{background:#fff3d6;border-color:#f0d28a;color:#8a5a00;font-weight:600}
