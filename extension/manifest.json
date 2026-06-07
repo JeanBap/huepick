@@ -1,15 +1,38 @@
 {
   "manifest_version": 3,
   "name": "HuePick — Color Picker, Palettes & Page Scanner",
-  "version": "2.1.0",
-  "description": "Eyedrop colours, scan a whole page's palette, manage named palettes, export to CSS/Tailwind, and check WCAG contrast & colour-blindness. Local-first.",
+  "version": "2.1.1",
+  "description": "Eyedrop colours, scan a page's palette, build named palettes, export to CSS/Tailwind, check WCAG contrast & colour-blindness.",
   "homepage_url": "https://huepick.yanni.uk",
-  "permissions": ["storage", "scripting", "activeTab"],
-  "host_permissions": ["https://extensionpay.com/*"],
-  "background": { "service_worker": "bg.js" },
-  "content_scripts": [
-    { "matches": ["https://extensionpay.com/*"], "js": ["ExtPay.js"], "run_at": "document_start" }
+  "permissions": [
+    "storage",
+    "scripting",
+    "activeTab"
   ],
-  "action": { "default_popup": "popup.html", "default_title": "HuePick" },
-  "icons": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" }
+  "host_permissions": [
+    "https://extensionpay.com/*"
+  ],
+  "background": {
+    "service_worker": "bg.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://extensionpay.com/*"
+      ],
+      "js": [
+        "ExtPay.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "HuePick"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
 }
