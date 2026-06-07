@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "HuePick — Color Picker & Palette",
-  "version": "1.0.1",
-  "description": "Pick any colour on screen, build palettes, copy HEX/RGB/HSL, check WCAG contrast. Local-first, no ads, no tracking.",
+  "name": "HuePick — Color Picker, Palettes & Page Scanner",
+  "version": "2.0.0",
+  "description": "Eyedrop colours, scan a whole page's palette, manage named palettes, export to CSS/Tailwind, check WCAG contrast & colour-blindness. Local-first, no tracking.",
   "homepage_url": "https://huepick.yanni.uk",
   "permissions": ["storage", "scripting", "activeTab"],
   "background": { "service_worker": "bg.js" },
-  "action": { "default_popup": "popup.html", "default_title": "HuePick — pick a colour" },
+  "action": { "default_popup": "popup.html", "default_title": "HuePick" },
   "icons": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" }
 }
