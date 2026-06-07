@@ -1,2 +1,3 @@
-// Keeps a service worker present (also used by the test harness to discover the extension id).
+importScripts('ExtPay.js');
+ExtPay('huepick').startBackground();
 chrome.runtime.onInstalled.addListener(() => {});
