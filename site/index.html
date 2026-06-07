@@ -1,46 +1,25 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HuePick — Color Picker & Palette for Chrome</title>
-<meta name="description" content="Pick any colour on screen, build palettes, copy HEX/RGB/HSL and check WCAG contrast. Local-first, no ads, no tracking.">
+<title>HuePick — Color Picker, Palettes & Page Scanner for Chrome</title>
+<meta name="description" content="Eyedrop colours, scan a whole page's palette, manage named palettes, export to CSS/Tailwind, and check WCAG contrast & colour-blindness. Local-first, no tracking.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%235b7cfa'/></svg>">
-<style>
-:root{--b:#5b7cfa;--ink:#1f2430;--mut:#5b6170;--bg:#f7f8fc}
-*{box-sizing:border-box;margin:0}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
-.wrap{max-width:880px;margin:0 auto;padding:0 22px}
-header{padding:22px 0;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:10px;font-weight:700}.dot{width:26px;height:26px;border-radius:8px;background:var(--b)}
-.hero{text-align:center;padding:56px 0 30px}.hero h1{font-size:40px;line-height:1.1;letter-spacing:-.5px}
-.hero p{color:var(--mut);font-size:18px;margin:16px auto 0;max-width:560px}
-.cta{display:inline-flex;gap:10px;margin-top:26px}
-.btn{display:inline-block;background:var(--b);color:#fff;text-decoration:none;font-weight:600;padding:12px 22px;border-radius:10px}
-.btn.ghost{background:#fff;color:var(--ink);border:1px solid #d9deea}
-.swatches{display:flex;gap:8px;justify-content:center;margin:34px 0 10px;flex-wrap:wrap}
-.sw{width:46px;height:46px;border-radius:10px;box-shadow:0 1px 0 rgba(0,0,0,.06)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:40px 0}
-.card{background:#fff;border:1px solid #e7eaf3;border-radius:14px;padding:20px}
-.card h3{font-size:16px;margin-bottom:6px}.card p{color:var(--mut);font-size:14px}
-.note{background:#eef2ff;border:1px solid #dbe3ff;border-radius:12px;padding:16px 18px;color:#33407a;font-size:14px;margin:10px 0 40px}
-footer{border-top:1px solid #e7eaf3;padding:26px 0;color:var(--mut);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-a{color:var(--b)}
-</style></head><body>
+<style>:root{--b:#5b7cfa;--ink:#1f2430;--mut:#5b6170;--bg:#f7f8fc}*{box-sizing:border-box;margin:0}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}.wrap{max-width:900px;margin:0 auto;padding:0 22px}header{padding:22px 0;display:flex;align-items:center;justify-content:space-between}.logo{display:flex;align-items:center;gap:10px;font-weight:700}.dot{width:26px;height:26px;border-radius:8px;background:var(--b)}.hero{text-align:center;padding:54px 0 26px}.hero h1{font-size:40px;line-height:1.1;letter-spacing:-.5px}.hero p{color:var(--mut);font-size:18px;margin:16px auto 0;max-width:600px}.btn{display:inline-block;background:var(--b);color:#fff;text-decoration:none;font-weight:600;padding:12px 22px;border-radius:10px}.btn.ghost{background:#fff;color:var(--ink);border:1px solid #d9deea}.cta{display:inline-flex;gap:10px;margin-top:24px}.swatches{display:flex;gap:8px;justify-content:center;margin:32px 0 6px;flex-wrap:wrap}.sw{width:44px;height:44px;border-radius:10px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:38px 0}.card{background:#fff;border:1px solid #e7eaf3;border-radius:14px;padding:20px}.card h3{font-size:16px;margin-bottom:6px}.card p{color:var(--mut);font-size:14px}.note{background:#eef2ff;border:1px solid #dbe3ff;border-radius:12px;padding:16px 18px;color:#33407a;font-size:14px;margin:8px 0 40px}footer{border-top:1px solid #e7eaf3;padding:26px 0;color:var(--mut);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}a{color:var(--b)}</style></head><body>
 <div class="wrap">
 <header><div class="logo"><span class="dot"></span>HuePick</div><a class="btn" href="#install">Add to Chrome</a></header>
 <section class="hero">
-  <h1>Pick any colour. Keep every palette.</h1>
-  <p>Eyedrop any pixel on screen, build palettes, copy HEX / RGB / HSL in one click, and check WCAG contrast. Local-first — nothing leaves your device.</p>
-  <div class="swatches">
-    <span class="sw" style="background:#5b7cfa"></span><span class="sw" style="background:#27ae60"></span>
-    <span class="sw" style="background:#f2c94c"></span><span class="sw" style="background:#eb5757"></span>
-    <span class="sw" style="background:#1f2430"></span><span class="sw" style="background:#9b51e0"></span>
-  </div>
+  <h1>Every colour on the page. In one click.</h1>
+  <p>Eyedrop any pixel, or scan a whole page's palette. Organise named palettes, export to CSS or Tailwind, and check accessibility — all local, no tracking.</p>
+  <div class="swatches"><span class="sw" style="background:#5b7cfa"></span><span class="sw" style="background:#27ae60"></span><span class="sw" style="background:#f2c94c"></span><span class="sw" style="background:#eb5757"></span><span class="sw" style="background:#1f2430"></span><span class="sw" style="background:#9b51e0"></span></div>
   <div class="cta"><a class="btn" id="install" href="#">Add to Chrome</a><a class="btn ghost" href="privacy.html">Privacy</a></div>
 </section>
-<div class="note"><strong>No ads. No tracking. No account.</strong> HuePick asks for a single permission (<code>storage</code>) and uses it only to save your palette on your own machine.</div>
+<div class="note"><strong>No ads. No tracking. No account.</strong> Two permissions, used only when you click Pick or Scan. Your palettes never leave your device.</div>
 <section class="grid">
-  <div class="card"><h3>System eyedropper</h3><p>Uses the native EyeDropper API for pixel-accurate picking with a zoom loupe.</p></div>
-  <div class="card"><h3>Palette history</h3><p>Every colour you pick is saved locally. Click to re-copy, export the whole set as JSON.</p></div>
-  <div class="card"><h3>Every format</h3><p>One click copies HEX, RGB or HSL. No reformatting by hand.</p></div>
-  <div class="card"><h3>Contrast check</h3><p>Instant WCAG contrast ratio against white and black, so your colours stay accessible.</p></div>
+  <div class="card"><h3>Scan a whole page</h3><p>Pull every colour actually used on the current page and keep the ones you want.</p></div>
+  <div class="card"><h3>System eyedropper</h3><p>Pixel-accurate picking that runs in the page, so it never loses your colour when the popup closes.</p></div>
+  <div class="card"><h3>Named palettes</h3><p>Multiple palettes, reorder and remove colours, switch in a click.</p></div>
+  <div class="card"><h3>Export anywhere</h3><p>One click to CSS variables, Tailwind config, JSON, or a plain list.</p></div>
+  <div class="card"><h3>Accessibility built in</h3><p>WCAG AA/AAA pass-fail on white and black, plus a colour-blindness preview.</p></div>
+  <div class="card"><h3>Every format</h3><p>Copy HEX, RGB or HSL instantly. No hand reformatting.</p></div>
 </section>
 <footer><span>© 2026 HuePick · built by Yanni</span><span><a href="privacy.html">Privacy</a> · <a href="https://github.com/JeanBap/huepick">Source</a></span></footer>
 </div></body></html>
