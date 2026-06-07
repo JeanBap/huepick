@@ -1,21 +1,24 @@
-# HuePick — Color Picker & Palette (Chrome / MV3)
+# HuePick — Color Picker, Palettes & Page Scanner (Chrome / MV3)
 
-Pick any colour on screen, build a palette, copy HEX / RGB / HSL, check WCAG contrast. Local-first: your palette never leaves your device. No ads, no tracking, least-privilege.
+The clean, private alternative to ColorZilla and Eye Dropper. Local-first: nothing leaves your device. No ads, no tracking, least-privilege.
 
-**v1.0.1** — robust picking: the eyedropper now runs in the page and writes the colour directly, so it survives the popup closing. Added a manual HEX field that always works, plus live palette updates and a full automated test harness.
+**v2.0.0**
+- **Eyedrop** any pixel (runs in the page, so it survives the popup closing) or type a HEX.
+- **Scan page** — extract every colour actually used on the current page, click any to keep.
+- **Named, reorderable palettes** — multiple sets, switch/rename/delete, move and remove colours.
+- **Export** to CSS variables, Tailwind config, JSON, or a plain list — one click.
+- **Accessibility built in** — WCAG AA/AAA pass-fail on white and black, plus a colour-blindness preview (protan/deutan/tritan).
+- Copy HEX / RGB / HSL. Old v1 palettes auto-migrate.
 
 ## Install (developer / review)
 1. `chrome://extensions` → enable **Developer mode**
-2. **Load unpacked** → select the `extension/` folder
-3. Click the toolbar icon → type a hex and **Add**, or click **Pick** and eyedrop any pixel.
+2. **Load unpacked** → select the `extension/` folder.
 
-## Test it
-See `tests/` — `npm run validate`, `npm run test:jsdom` (runs the real popup logic), and `npm test` (headless Chrome). All green.
+## Test
+`cd tests && npm install` then `npm run validate`, `npm run test:jsdom` (runs the real popup logic, 17 checks), `npm test` (headless Chrome). All green.
 
 ## Layout
-- `extension/` — loadable MV3 extension
-- `site/` — landing + privacy pages (Cloudflare Pages dir)
-- `tests/` — automated test harness
+`extension/` (loadable MV3) · `site/` (landing + privacy, Cloudflare Pages dir) · `tests/` (harness)
 
 ## Privacy
-Palette is stored only in `chrome.storage.local`. Nothing is transmitted. MIT licensed.
+Only your palettes are stored, in `chrome.storage.local`, on your device. Scan reads page colours in memory to show them; nothing is stored or transmitted. MIT licensed.
