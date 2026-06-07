@@ -38,7 +38,7 @@ async function doPick(){try{const t=await activeTab();if(bad(t.url)){toast('Open
     try{const{sRGBHex}=await new window.EyeDropper().open();const d=await chrome.storage.local.get({palettes:[{name:'My palette',colors:[]}],active:0});const ps=d.palettes;const i=Math.min(active,ps.length-1);if(!ps[i].colors.includes(sRGBHex))ps[i].colors.push(sRGBHex);await chrome.storage.local.set({palettes:ps});return{hex:sRGBHex};}catch(e){return{err:'cancel'};}}});
   const r=res&&res.result;if(r&&r.hex)load(()=>{sel=pal().colors.indexOf(r.hex);show(r.hex);renderAll();});else if(r&&r.err==='unsupported')toast('EyeDropper unsupported on this Chrome');
 }catch(e){toast('Cannot pick on this page');}}
-async function doScan(){try{const t=await activeTab();if(bad(t.url)){toast('Open a web page to scan');return;}
+async function doScan(){if(!pro){needPro("Page scan");return;}try{const t=await activeTab();if(bad(t.url)){toast('Open a web page to scan');return;}
   const[res]=await chrome.scripting.executeScript({target:{tabId:t.id},func:()=>{
     const seen={};const add=c=>{if(!c)return;const m=String(c).match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?/i);if(!m)return;if(m[4]!==undefined&&parseFloat(m[4])===0)return;const hex='#'+[m[1],m[2],m[3]].map(x=>(+x).toString(16).padStart(2,'0')).join('');seen[hex]=(seen[hex]||0)+1;};
     let n=0;for(const el of document.querySelectorAll('body *')){if(n++>5000)break;const r=el.getBoundingClientRect();if(r.width<2||r.height<2)continue;const cs=getComputedStyle(el);add(cs.color);add(cs.backgroundColor);add(cs.borderTopColor);add(cs.fill);add(cs.stroke);}
@@ -50,13 +50,21 @@ $('#add').onclick=addManual;$('#hexin').addEventListener('keydown',e=>{if(e.key=
 $('#pick').onclick=doPick;$('#scan').onclick=doScan;
 $$('.code').forEach(b=>b.onclick=()=>{if(!cur)return;const v=b.dataset.c==='hex'?toHex(cur):b.dataset.c==='rgb'?toRgb(cur):toHsl(cur);if(navigator.clipboard)navigator.clipboard.writeText(v);toast('Copied '+v);});
 $('#export').onclick=()=>{$('#exportmenu').hidden=!$('#exportmenu').hidden;};
-$$('#exportmenu button').forEach(b=>b.onclick=()=>{const out=FMT[b.dataset.f](pal().colors);if(navigator.clipboard)navigator.clipboard.writeText(out);$('#exportmenu').hidden=true;toast('Copied as '+b.dataset.f);});
+$$('#exportmenu button').forEach(b=>b.onclick=()=>{if(!pro){needPro('Export');return;}const out=FMT[b.dataset.f](pal().colors);if(navigator.clipboard)navigator.clipboard.writeText(out);$('#exportmenu').hidden=true;toast('Copied as '+b.dataset.f);});
 $('#palsel').onchange=e=>{state.active=+e.target.value;sel=-1;$('#current').hidden=true;save(()=>renderAll());};
-$('#newpal').onclick=()=>{const n=prompt('New palette name','Palette '+(state.palettes.length+1));if(!n)return;state.palettes.push({name:n,colors:[]});state.active=state.palettes.length-1;sel=-1;$('#current').hidden=true;save(()=>renderAll());};
+$('#newpal').onclick=()=>{if(!pro&&state.palettes.length>=1){needPro('Multiple palettes');return;}const n=prompt('New palette name','Palette '+(state.palettes.length+1));if(!n)return;state.palettes.push({name:n,colors:[]});state.active=state.palettes.length-1;sel=-1;$('#current').hidden=true;save(()=>renderAll());};
 $('#renpal').onclick=()=>{const n=prompt('Rename palette',pal().name);if(!n)return;pal().name=n;save(()=>renderSelect());};
 $('#delpal').onclick=()=>{if(state.palettes.length<=1)pal().colors=[];else{state.palettes.splice(state.active,1);state.active=0;}sel=-1;$('#current').hidden=true;save(()=>renderAll());};
 $('#rmcolor').onclick=()=>{if(sel<0)return;pal().colors.splice(sel,1);sel=-1;$('#current').hidden=true;save(()=>renderAll());};
 $('#movel').onclick=()=>{if(sel<=0)return;const c=pal().colors;[c[sel-1],c[sel]]=[c[sel],c[sel-1]];sel--;save(()=>renderPalette());};
 $('#mover').onclick=()=>{const c=pal().colors;if(sel<0||sel>=c.length-1)return;[c[sel+1],c[sel]]=[c[sel],c[sel+1]];sel++;save(()=>renderPalette());};
 chrome.storage.onChanged.addListener((ch,a)=>{if(a==='local'&&(ch.palettes||ch.palette))load(()=>renderAll());});
+let pro=false,extpay=null;
+try{extpay=ExtPay('huepick');}catch(e){}
+function renderProUI(){const u=document.querySelector('#upgrade');if(u)u.hidden=pro;document.body.classList.toggle('is-pro',pro);}
+function needPro(f){toast(f+' is Pro \u2014 opening checkout');if(extpay&&extpay.openPaymentPage)extpay.openPaymentPage();}
+function refreshPro(){if(!extpay)return renderProUI();extpay.getUser().then(u=>{pro=!!(u&&u.paid);renderProUI();}).catch(()=>renderProUI());}
+if(extpay&&extpay.onPaid&&extpay.onPaid.addListener)extpay.onPaid.addListener(()=>{pro=true;renderProUI();});
+{const _u=document.querySelector('#upgrade');if(_u)_u.onclick=()=>{if(extpay)extpay.openPaymentPage();};}
+refreshPro();
 load(()=>renderAll());
