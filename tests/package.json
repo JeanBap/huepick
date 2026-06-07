@@ -1,0 +1,11 @@
+{
+  "name": "huepick-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node validate.mjs",
+    "test:jsdom": "node test-jsdom.mjs",
+    "test": "node test.mjs"
+  },
+  "devDependencies": { "jsdom": "^29.0.0", "puppeteer": "^23.0.0" }
+}
