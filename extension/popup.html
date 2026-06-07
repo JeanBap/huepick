@@ -1,22 +1,34 @@
 <!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="popup.css"></head>
 <body>
-<header><div class="logo"><span class="dot"></span>HuePick</div></header>
+<header>
+  <div class="logo"><span class="dot"></span>HuePick</div>
+  <select id="palsel" title="Active palette"></select>
+  <button id="newpal" title="New palette">+</button>
+  <button id="renpal" title="Rename palette">&#9998;</button>
+  <button id="delpal" title="Delete / clear palette">&#128465;</button>
+</header>
 <div class="row">
   <input id="hexin" placeholder="#5b7cfa" maxlength="7" autocomplete="off" spellcheck="false">
   <button id="add">Add</button>
   <button id="pick" class="primary">Pick</button>
+  <button id="scan" title="Extract every colour used on this page">Scan</button>
 </div>
 <section id="current" hidden>
   <div id="swatch"></div>
-  <div class="codes">
-    <button class="code" data-c="hex">HEX</button>
-    <button class="code" data-c="rgb">RGB</button>
-    <button class="code" data-c="hsl">HSL</button>
+  <div class="curtop"><span id="curhex"></span>
+    <span class="ops"><button id="movel" title="Move left">&#9664;</button><button id="mover" title="Move right">&#9654;</button><button id="rmcolor" title="Remove">&#10005;</button></span>
   </div>
+  <div class="codes"><button class="code" data-c="hex">HEX</button><button class="code" data-c="rgb">RGB</button><button class="code" data-c="hsl">HSL</button></div>
   <div id="contrast"></div>
+  <div class="cbrow"><span class="cblbl">Colour-blind preview:</span><span id="cb"></span></div>
 </section>
-<h2>Palette <button id="clear" title="Clear all">clear</button></h2>
+<h2>Palette <button id="export">Export &#9662;</button></h2>
+<div id="exportmenu" hidden>
+  <button data-f="CSS variables">CSS variables</button><button data-f="Tailwind">Tailwind</button>
+  <button data-f="JSON">JSON</button><button data-f="List">List</button>
+</div>
 <ul id="palette"></ul>
-<footer><button id="export">Export JSON</button><span id="toast"></span></footer>
+<section id="pagewrap" hidden><h2>From this page <span class="hint">click to add</span></h2><ul id="pagecolors"></ul></section>
+<footer><span id="toast"></span></footer>
 <script src="popup.js"></script>
 </body></html>
